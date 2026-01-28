@@ -1,0 +1,123 @@
+
+PYPROJECT.TOML – EXPLANATION
+=================================
+
+1. What is pyproject.toml?
+--------------------------
+pyproject.toml is like an ID card for your Python project.
+It tells Python:
+- Project name
+- Version
+- Dependencies
+- How the project should be built
+
+TOML is just a clean and readable configuration format.
+
+
+2. Why pyproject.toml is important
+---------------------------------
+Earlier, everything was handled using setup.py, which was Python code and could get messy.
+
+pyproject.toml was introduced to:
+- Modernize Python packaging
+- Separate configuration from code
+- Make dependency and build management cleaner
+- Support multiple build tools (setuptools, poetry, etc.)
+
+In short: it is the new standard.
+
+
+3. Important sections in pyproject.toml
+---------------------------------------
+
+[project]
+- Basic project information
+- name, version, description, authors
+
+[tool.setuptools]
+- Tells Python that setuptools is used as the build tool
+
+[tool.setuptools.dynamic]
+- Allows dependencies to be read from another file
+- Example: requirements.txt
+- Avoids repeating dependency lists
+
+
+4. setup.py after pyproject.toml
+--------------------------------
+setup.py is no longer the main file for metadata.
+
+Now:
+- Metadata → pyproject.toml
+- Dependencies → pyproject.toml (or linked files)
+- setup.py → optional, only for complex/custom builds
+
+For most ML, FastAPI, or MLOps projects, setup.py is minimal or not needed.
+
+
+5. How pyproject.toml, setup.py, and requirements.txt work together
+-------------------------------------------------------------------
+requirements.txt:
+- Lists all project dependencies
+- Used with: pip install -r requirements.txt
+
+pyproject.toml:
+- Central configuration file
+- Can reference requirements.txt for dependencies
+
+setup.py:
+- Optional helper for custom build logic
+
+
+CROSS-ORIGIN RESOURCE SHARING (CORS)
+===================================
+Browsers block requests between different origins (domain, port, protocol) by default.
+
+Example:
+Frontend: http://localhost:3000
+Backend:  http://localhost:8000
+
+CORS decides whether this connection is allowed.
+
+allow_origins = ["*"]
+Means:
+- Any frontend can access the backend
+- Useful for development and testing
+- Should be restricted in production
+
+
+ASYNC AND AWAIT (SIMPLE EXPLANATION)
+===================================
+async allows a function to pause while waiting without blocking the entire app.
+
+await pauses only that function while other tasks continue running.
+
+Example:
+async def get_vehicle_data():
+    form = await request.form()
+
+Benefits:
+- Faster handling of multiple users
+- Efficient for APIs, databases, and network calls
+
+
+GITHUB SELF-HOSTED RUNNER (EC2)
+==============================
+
+Problem:
+Running ./run.sh starts the runner in the terminal foreground.
+If the terminal closes or EC2 restarts, the runner stops.
+
+Solution:
+Run the runner as a service.
+
+Steps:
+1. cd ~/actions-runner
+2. sudo ./svc.sh install
+3. sudo ./svc.sh start
+4. sudo ./svc.sh status
+5. sudo systemctl enable actions.runner.<runner-name>.service
+
+Result:
+- Runner runs in the background
+- Automatically starts after reboot
