@@ -1,5 +1,4 @@
-```md
-# Vehicle Insurance MLOps Pipeline
+# 🚗 Vehicle Insurance MLOps Pipeline
 
 An **end-to-end production-grade MLOps project** that covers everything from data ingestion using MongoDB, model training, evaluation, deployment on AWS, and CI/CD automation using GitHub Actions, Docker, ECR, and EC2.
 
@@ -7,7 +6,7 @@ This project follows **industry-level modular architecture**, proper logging, ex
 
 ---
 
-## Project Highlights
+## 📌 Project Highlights
 
 - Modular MLOps architecture
 - MongoDB Atlas for data storage
@@ -20,37 +19,35 @@ This project follows **industry-level modular architecture**, proper logging, ex
 
 ---
 
-## Project Structure
-
-```
+## 🗂️ Project Structure
 
 ├── artifact/
 ├── config/
-│   └── schema.yaml
+│ └── schema.yaml
 ├── constants/
 ├── entity/
-│   ├── config_entity.py
-│   ├── artifact_entity.py
-│   ├── estimator.py
-│   └── s3_estimator.py
+│ ├── config_entity.py
+│ ├── artifact_entity.py
+│ ├── estimator.py
+│ └── s3_estimator.py
 ├── src/
-│   ├── components/
-│   │   ├── data_ingestion.py
-│   │   ├── data_validation.py
-│   │   ├── data_transformation.py
-│   │   ├── model_trainer.py
-│   │   ├── model_evaluation.py
-│   │   └── model_pusher.py
-│   ├── configuration/
-│   │   ├── mongo_db_connections.py
-│   │   └── aws_connection.py
-│   ├── aws_storage/
-│   ├── data_access/
-│   ├── utils/
-│   │   └── main_utils.py
+│ ├── components/
+│ │ ├── data_ingestion.py
+│ │ ├── data_validation.py
+│ │ ├── data_transformation.py
+│ │ ├── model_trainer.py
+│ │ ├── model_evaluation.py
+│ │ └── model_pusher.py
+│ ├── configuration/
+│ │ ├── mongo_db_connections.py
+│ │ └── aws_connection.py
+│ ├── aws_storage/
+│ ├── data_access/
+│ ├── utils/
+│ │ └── main_utils.py
 ├── notebook/
-│   ├── mongoDB_demo.ipynb
-│   └── EDA_Feature_Engineering.ipynb
+│ ├── mongoDB_demo.ipynb
+│ └── EDA_Feature_Engineering.ipynb
 ├── static/
 ├── templates/
 ├── app.py
@@ -63,272 +60,191 @@ This project follows **industry-level modular architecture**, proper logging, ex
 ├── .gitignore
 └── .github/workflows/aws.yaml
 
-````
 
 ---
 
-## Environment Setup
+## ⚙️ Environment Setup
 
 ### 1️⃣ Create Project Template
 ```bash
 python template.py
-````
-
----
-
-### 2️⃣ Local Package Setup
-
+2️⃣ Local Package Setup
 Add proper configuration in:
 
-* `setup.py`
-* `pyproject.toml`
+setup.py
 
-📄 Refer to `crashcourse.txt` for detailed explanation.
+pyproject.toml
 
----
+📄 Refer to crashcourse.txt for detailed explanation.
 
-### 3️⃣ Create & Activate Virtual Environment
-
-```bash
+3️⃣ Create & Activate Virtual Environment
 conda create -n vehicle python=3.10 -y
 conda activate vehicle
 pip install -r requirements.txt
-```
-
 Verify installation:
 
-```bash
 pip list
-```
+🍃 MongoDB Atlas Setup
+4️⃣ MongoDB Configuration Steps
+Sign up on MongoDB Atlas
 
----
+Create a new project
 
-## MongoDB Atlas Setup
+Create M0 Cluster
 
-### 4️⃣ MongoDB Configuration Steps
+Create database user (username & password)
 
-1. Sign up on **MongoDB Atlas**
-2. Create a new project
-3. Create **M0 Cluster**
-4. Create database user (username & password)
-5. Network Access → Allow IP:
+Network Access → Allow IP:
 
-```
 0.0.0.0/0
-```
+Get Connection String:
 
-6. Get Connection String:
-
-```
 Python Driver → Version 3.6+
-```
-
----
-
-### 5️⃣ Notebook Setup
-
-```text
+5️⃣ Notebook Setup
 notebook/
 ├── mongoDB_demo.ipynb
-```
+Load dataset
 
-* Load dataset
-* Push data to MongoDB
-* Verify in **Atlas → Browse Collections**
+Push data to MongoDB
 
----
+Verify in Atlas → Browse Collections
 
-## Logging & Exception Handling
+🪵 Logging & Exception Handling
+Custom logger implementation
 
-* Custom logger implementation
-* Centralized exception handling
-* Tested using `demo.py`
+Centralized exception handling
 
----
+Tested using demo.py
 
-## Data Ingestion Pipeline
+🔄 Data Ingestion Pipeline
+Key Components
+constants/__init__.py
 
-### Key Components
+configuration/mongo_db_connections.py
 
-* `constants/__init__.py`
-* `configuration/mongo_db_connections.py`
-* `data_access/proj1_data.py`
-* `entity/config_entity.py`
-* `entity/artifact_entity.py`
-* `components/data_ingestion.py`
+data_access/proj1_data.py
 
----
+entity/config_entity.py
 
-### MongoDB Environment Variable Setup
+entity/artifact_entity.py
 
-#### Bash
+components/data_ingestion.py
 
-```bash
+MongoDB Environment Variable Setup
+Bash
 export MONGODB_URL="mongodb+srv://<username>:<password>..."
 echo $MONGODB_URL
-```
-
-#### PowerShell
-
-```powershell
+PowerShell
 $env:MONGODB_URL="mongodb+srv://<username>:<password>..."
 echo $env:MONGODB_URL
-```
+⚠️ Add artifact/ to .gitignore
 
- Add `artifact/` to `.gitignore`
+✅ Data Validation
+Schema validation using schema.yaml
 
----
+Column, datatype, and null checks
 
-## Data Validation
+Drift detection support
 
-* Schema validation using `schema.yaml`
-* Column, datatype, and null checks
-* Drift detection support
+🔁 Data Transformation
+Feature engineering
 
----
+Encoding & scaling
 
-## Data Transformation
+Train-test split
 
-* Feature engineering
-* Encoding & scaling
-* Train-test split
-* Stored as transformation artifacts
+Stored as transformation artifacts
 
----
+🤖 Model Trainer
+Model training using sklearn
 
-## Model Trainer
+Evaluation metrics tracking
 
-* Model training using sklearn
-* Evaluation metrics tracking
-* Model serialization
+Model serialization
 
----
+☁️ AWS Setup (S3 + IAM)
+AWS IAM User Creation
+User: firstproj
 
-## AWS Setup (S3 + IAM)
+Policy: AdministratorAccess
 
-### AWS IAM User Creation
+Generate Access Keys
 
-* User: `firstproj`
-* Policy: `AdministratorAccess`
-* Generate Access Keys
-
----
-
-### Environment Variables
-
-```bash
+Environment Variables
 export AWS_ACCESS_KEY_ID="..."
 export AWS_SECRET_ACCESS_KEY="..."
-```
-
----
-
-### Constants Configuration
-
-```python
+Constants Configuration
 MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE = 0.02
 MODEL_BUCKET_NAME = "my-model-mlopsproj"
 MODEL_PUSHER_S3_KEY = "model-registry"
-```
+S3 Bucket Setup
+Bucket Name: my-model-mlopsproj
 
----
+Region: us-east-1
 
-### S3 Bucket Setup
+Public access allowed
 
-* Bucket Name: `my-model-mlopsproj`
-* Region: `us-east-1`
-* Public access allowed
+📊 Model Evaluation & Model Pusher
+Compare new model vs existing production model
 
----
+Push best model to S3 model registry
 
-## Model Evaluation & Model Pusher
+🔮 Prediction Pipeline
+FastAPI based API
 
-* Compare new model vs existing production model
-* Push best model to S3 model registry
+/predict endpoint
 
----
+/training endpoint for model retraining
 
-## Prediction Pipeline
+🐳 Docker & CI/CD
+Docker Setup
+Dockerfile
 
-* FastAPI based API
-* `/predict` endpoint
-* `/training` endpoint for model retraining
+.dockerignore
 
----
+GitHub Actions Workflow
+.github/workflows/aws.yaml
 
-## Docker & CI/CD
+Automated build & deployment
 
-### Docker Setup
+🚀 Deployment (AWS EC2)
+EC2 Setup
+Ubuntu Server 24.04
 
-* `Dockerfile`
-* `.dockerignore`
+Instance: t2.medium
 
----
+Open Port: 5080
 
-### GitHub Actions Workflow
-
-* `.github/workflows/aws.yaml`
-* Automated build & deployment
-
----
-
-## Deployment (AWS EC2)
-
-### EC2 Setup
-
-* Ubuntu Server 24.04
-* Instance: `t2.medium`
-* Open Port: `5080`
-
----
-
-### Docker Installation
-
-```bash
+Docker Installation
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo usermod -aG docker ubuntu
 newgrp docker
-```
+GitHub Self-Hosted Runner
+Connect EC2 with GitHub Actions
 
----
+Runner runs CI/CD pipeline
 
-### GitHub Self-Hosted Runner
-
-* Connect EC2 with GitHub Actions
-* Runner runs CI/CD pipeline
-
----
-
-## GitHub Secrets
-
+🔐 GitHub Secrets
 Add the following secrets:
 
-```
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
 AWS_DEFAULT_REGION
 ECR_REPO
-```
-
----
-
-## Application Access
-
-```
+🌐 Application Access
 http://<EC2_PUBLIC_IP>:5080
-```
+🧠 Tech Stack
+Python
 
----
+MongoDB Atlas
 
-## Tech Stack
+Scikit-learn
 
-* Python
-* MongoDB Atlas
-* Scikit-learn
-* FastAPI
-* Docker
-* AWS (S3, ECR, EC2, IAM)
-* GitHub Actions
+FastAPI
 
----
+Docker
+
+AWS (S3, ECR, EC2, IAM)
+
+GitHub Actions
