@@ -1,7 +1,3 @@
-
-PYPROJECT.TOML – EXPLANATION
-=================================
-
 1. What is pyproject.toml?
 --------------------------
 pyproject.toml is like an ID card for your Python project.
